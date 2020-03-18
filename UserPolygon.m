@@ -32,6 +32,22 @@ classdef UserPolygon
             end
         end 
         
+        % collision points
+        function [collision_points] = collision(obj, polygon)
+            
+            % note the .' syntax means transpose
+            % for loop in matlab default iterates over columns
+            % so we are sort of switching there, then back
+            collision_points = []
+            for objpoint = obj.points.'
+                for polpoint = polygon.points.'
+                    if objpoint == polpoint
+                        collision_points = [collision_points ; objpoint.']
+                    end
+                end
+            end
+        end
+        
     end
     
 end

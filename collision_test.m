@@ -20,7 +20,7 @@ blue = screen(:, :, 3);
 
 % Creating UserPolygon objects:
 my_polygon1 = UserPolygon([[5, 5]; [100, 10]; [100, 100] ; [10, 100]; [5, 5]])
-my_polygon2 = UserPolygon([[8, 8]; [200, 20]; [12, 300]; [8, 8]])
+my_polygon2 = UserPolygon([[100, 100]; [200, 200]; [200, 100]; [100, 100]])
 
 % Drawing the polygons
 red = my_polygon1.draw(red);
@@ -31,14 +31,8 @@ imshow(screen)
 
 
 polygons = [my_polygon1, my_polygon2]
+collision_points = my_polygon1.collision(my_polygon2)
 
-%{ 
-TODO
-
-% returns which polygons are collided and at which locations
-my_polygon1.collisiontest(polygons)
-
-%}
 
 
 
