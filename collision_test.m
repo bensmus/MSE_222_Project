@@ -19,15 +19,27 @@ blue = screen(:, :, 3);
 % currently set to zero.
 
 % Creating UserPolygon objects:
-my_polygon1 = UserPolygon([[5, 5]; [100, 10]; [100, 100] ; [10, 100]; [5, 5]])
-my_polygon2 = UserPolygon([[100, 100]; [200, 200]; [200, 100]; [100, 100]])
+% Coordinates of square and triangle, respectively
 
-% Drawing the polygons
-red = my_polygon1.draw(red);
-green = my_polygon2.draw(green);
 
-screen = cat(3, red, green, blue);
-imshow(screen)
+% Creating an animation loop
+
+for t=1:100
+    
+    % Defining the polygons depending on the time
+    my_polygon1 = UserPolygon([[5 + uint8(t / 100), 5]; [100, 10]; [100, 100] ; [10, 100]; [5, 5]])
+    my_polygon2 = UserPolygon([[100, 100]; [200, 200]; [200, 100]; [100, 100]])
+    
+    % Drawing the polygons
+    red = my_polygon1.draw(red);
+    green = my_polygon2.draw(green);
+
+    screen = cat(3, red, green, blue);
+    imshow(screen)
+    
+    M(t) = getframe;
+end
+movie(M)
 
 
 polygons = [my_polygon1, my_polygon2]
