@@ -19,15 +19,22 @@ for t = 1:10
 end
 %}
 
+%{
 for t = 1:10
     xlim([0, 60])
     ylim([0, 60])
     line([10, 10], [10, 10 + 5*t])
-    pause(1)
+
+    % final project frame rate
+    pause(0.1)
 end
+%}
 
-
-
-
-
-
+% testing 'handles'
+xlim([0, 10]);
+ylim([0, 10]);
+h1 = line([0, 1], [2, 3])
+h2 = line([4, 5], [9, 8])
+pause(3)
+delete(h2)
+% matlab does not autoclose
