@@ -23,18 +23,22 @@ classdef UserPolygon2
             y = obj.vertices(:, 2);
 
             % surprisingly draws a sequence of line
-            handle = line(x, y, 'Color', obj.colorname);
+            handle = line(x, y, 'Color', obj.colorname, 'LineWidth', 3);
         end
 
-        function points = getpoints(obj)
+        function obj = updatepoints(obj)
             % a sample of points that make up the polygon
             % useful to detect collisions
-            points = [];
+            obj.points = [];
             [m, ~] = size(obj.vertices);
 
             for i = 1:(m - 1)
-                points = [points; UserLine(obj.vertices(i, :), obj.vertices(i+1, :))];
+                obj.points = [obj.points; UserLine(obj.vertices(i, :), obj.vertices(i+1, :))];
             end
+        end
+
+        function obj = move(obj, direction_vector)
+            obj.vertices = obj.vertices + direction_vector;
         end
     end
 end

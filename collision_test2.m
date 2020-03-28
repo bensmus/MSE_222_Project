@@ -6,12 +6,29 @@ ylim([0, screeny]);
 % will take ten seconds real time
 % will move 100 units to the right
 
-for t = 1:0.1:10
-    dx = t * 10;
-    jeff_polygon = UserPolygon2([[0 + dx, 0]; [100 + dx, 100]; [300 + dx, 200]], 'red');
+jeff_polygon = UserPolygon2([[0, 0]; [100, 100]; [300, 200]], 'red');
+sarah_polygon = UserPolygon2([[500, 500]; [400, 350]; [300, 200]], 'green');
 
+for t = 0:0.1:10
+    % getting up to date point data
+    jeff_polygon = jeff_polygon.updatepoints();
+    sarah_polygon = sarah_polygon.updatepoints();
+    
+    % finding common points between polygons
+    common = intersect(jeff_polygon.points, sarah_polygon.points, 'rows')
+    
+    % moves the polygon to the right one unit
+    jeff_polygon = jeff_polygon.move([1, 0]);
+    sarah_polygon = sarah_polygon.move([-1, -1.5]);
+    
     % handle is the drawing of the polygon this iteration
-    handle = jeff_polygon.draw();
+    jeffhandle = jeff_polygon.draw();
+    sarahhandle = sarah_polygon.draw();
+    
     pause(0.1);
-    delete(handle);
+    delete(jeffhandle);
+    delete(sarahhandle);
 end
+
+lastjeff = jeff_polygon.draw();
+lastsarah = sarah_polygon.draw();
