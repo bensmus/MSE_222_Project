@@ -1,9 +1,9 @@
 classdef UserPolygon2
 
     properties
-        vertices = []
-        colorname = ""
-        points = []
+        vertices;
+        colorname;
+        points;
     end
 
     methods
@@ -29,7 +29,10 @@ classdef UserPolygon2
         function obj = updatepoints(obj)
             % a sample of points that make up the polygon
             % useful to detect collisions
+            
+            % clearing the list in order to get new points only
             obj.points = [];
+            
             [m, ~] = size(obj.vertices);
 
             for i = 1:(m - 1)

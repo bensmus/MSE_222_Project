@@ -1,4 +1,4 @@
-function [points] = UserLine(vertexA, vertexB)
+function points = UserLine(vertexA, vertexB)
     points = [vertexA];
     difference_vector = vertexB - vertexA;
     for i = 0.01:0.01:1
