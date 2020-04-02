@@ -1,10 +1,19 @@
 % Teresa's Test space
 
-%% impact test
-
-X1 = 30;
-Y1 = 12;
-R = 1;
+X1 = 0;
+Y1 = 0;
+R = 0.007;
 E = 3;
+T = 0;
+M = 0.005;
+F = 1;
 
-[X, Y] = impact(X1,Y1,R,E)
+%% impact Vert test
+
+% try to make it time based somehow 
+
+[X, Y] = impactVert(X1,Y1,R,E);
+
+%% impact horizontal test 
+
+[X, Y] = impactInit(F,R,T,M)

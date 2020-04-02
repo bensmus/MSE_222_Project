@@ -1,0 +1,13 @@
+% Teresa's Test space
+
+%% impact Vert test
+
+% try to make it time based somehow 
+X1 = 30;
+Y1 = 12;
+R = 1;
+E = 3;
+
+[X, Y] = impact(X1,Y1,R,E)
+
+%% impact 
