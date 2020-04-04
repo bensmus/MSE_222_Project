@@ -5,12 +5,12 @@
 
 
 function [a, vx, vy, dx, dy, time] = impactInit(a, vx, vy, dx, dy, t0, force, radius, mass)
+%time stored as a millisecond. convert to seconds for calculations
+sec = floor(t0*1000);
 
 %setting up initial values at start of function (included as foundation) 
 vx0 = vx(t0);
 vy0 = vy(t0);
-%time stored as a millisecond. convert to seconds for calculations
-sec = floor(t0*1000);
 
 %calculating the immediate resulting velocities after hit
 vx1 = (force*radius*sec)/((-mass*radius)+((4/3)*pi()*radius*radius));
