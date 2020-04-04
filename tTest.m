@@ -5,7 +5,7 @@ Y1 = 0;
 R = 0.007;
 E = 3;
 T = 0;
-M = 0.005;
+M = 0.00378; %using formula, est. at 3.78 grams
 F = 1;
 
 %% impact Vert test
