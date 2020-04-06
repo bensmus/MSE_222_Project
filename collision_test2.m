@@ -8,7 +8,7 @@ ylim([0, screeny]);
 
 jeff_polygon = UserPolygon2([[0, 0]; [10, 10]; [30, 20]], 'red');
 sarah_polygon = UserPolygon2([[50, 50]; [40, 35]; [30, 20]], 'green');
-marble = UserPolygon2(UserArcFunction([0, 59], 0:0.1:2*pi, 0.7), 'blue');
+marble = UserPolygon2(UserArcFunction([0, 59], -2*pi:0.1:2*pi, 0.7), 'blue');
 
 for t = 0:0.1:3
     % getting up to date point data
