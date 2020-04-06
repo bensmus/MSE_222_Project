@@ -4,7 +4,11 @@ xlim([0, screenx]);
 ylim([0, screeny]);
 
 marble = UserPolygon2(UserArcFunction([10, 50], -2*pi:0.1:2*pi, 1), 'blue');
+<<<<<<< HEAD
 obs1 = UserPolygon2([[0, 30]; [30, 0]], 'red');
+=======
+obs1 = UserPolygon2(UserArcFunction([30, 0], -2*pi:0.1:2*pi, 20), 'red');
+>>>>>>> master
 
 % slanted is a static polygon and does not need to be inside the loop
 obs1 = obs1.updatepoints();
