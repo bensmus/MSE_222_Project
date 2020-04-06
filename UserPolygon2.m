@@ -45,16 +45,17 @@ classdef UserPolygon2
             obj.vertices = obj.vertices + direction_vector;
         end
         
+        
         function n = normal(obj, point)
+            
             % find index of point in obj.points
             [~, i] = ismember(point, obj.points, 'rows');
             
-            tangent = obj.points(i + 1, :) - obj.points(i - 1, :);
-            n = tangent ./ norm(tangent);
+            % user defined function
+            n = tangent_vector(obj.points, point);
             
             % 90 degree rotation matrix
             n = [-n(2), n(1)];
-        end
-            
+        end  
     end
 end

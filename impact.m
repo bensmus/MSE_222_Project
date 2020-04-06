@@ -46,36 +46,38 @@
 
 function vf = impact(v_init, obs_norm)
 
-%define the constitution of restitution
-e = 0.557;
+    %define the constitution of restitution
+    e = 0.557;
 
-%finding the initial magnitudes
-v0 = v_init%sqrt(v_init(1)^2 + v_init(2)^2)
-n0 = obs_norm%sqrt(obs_norm(1)^2 + obs_norm(2)^2)
+    %finding the initial magnitudes
+    v0 = v_init %sqrt(v_init(1)^2 + v_init(2)^2)
+    n0 = obs_norm %sqrt(obs_norm(1)^2 + obs_norm(2)^2)
 
-%finding the dot products
-dotvn = dot(v_init, obs_norm)
-dotnn = dot(obs_norm, obs_norm)
+    %finding the dot products
+    dotvn = dot(v_init, obs_norm)
+    dotnn = dot(obs_norm, obs_norm)
 
-%finding the velocity component perp to the normal vector
-u = (dotvn / dotnn)*obs_norm
+    %finding the velocity component perp to the normal vector
+    u = (dotvn / dotnn)*obs_norm
 
-%finding the velocity component parallel to normal vector
-w = v0 - u
-% 
-% %transforming normal vector to unit vector 
-% nu = (obs_norm)/n0
-% 
-% %finding the angle of impact
-% theta = atand(obs_norm(2)/obs_norm(1))
+    %finding the velocity component parallel to normal vector
+    w = v0 - u
+    % 
+    % %transforming normal vector to unit vector 
+    % nu = (obs_norm)/n0
+    % 
+    % %finding the angle of impact
+    % theta = atand(obs_norm(2)/obs_norm(1))
 
-%finding the resultant velocity; assuming friction is zero
-vf = w - e * u
+    %finding the resultant velocity; assuming friction is zero
+    vf = w - e * u
 
-% %storing the final components of velocity
-% vx1 = v1 * cosd(theta)
-% vy1 = v1 * sind(theta)
-% vf = [vx1 vy1]
+    % %storing the final components of velocity
+    % vx1 = v1 * cosd(theta)
+    % vy1 = v1 * sind(theta)
+    % vf = [vx1 vy1]
+end
+
 
 
 
