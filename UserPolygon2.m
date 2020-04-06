@@ -1,3 +1,4 @@
+% any point should give a normal vector to the polygon
 classdef UserPolygon2
 
     properties
@@ -43,5 +44,17 @@ classdef UserPolygon2
         function obj = move(obj, direction_vector)
             obj.vertices = obj.vertices + direction_vector;
         end
+        
+        function n = normal(obj, point)
+            % find index of point in obj.points
+            [~, i] = ismember(point, obj.points, 'rows');
+            
+            tangent = obj.points(i + 1, :) - obj.points(i - 1, :);
+            n = tangent ./ norm(tangent);
+            
+            % 90 degree rotation matrix
+            n = [-n(2), n(1)];
+        end
+            
     end
 end
