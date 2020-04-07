@@ -5,7 +5,7 @@ ylim([0, screeny]);
 
 marble = UserPolygon2(UserArcFunction([30, 60], -2*pi:0.1:2*pi, 1), 'blue');
 obs1 = UserPolygon2(UserArcFunction([40, 0], -2*pi:0.1:2*pi, 20), 'red');
-obs2 = UserPolygon2([[0, 40]; [30, 45]], 'red');
+obs2 = UserPolygon2([[0, 40]; [30, 40]], 'red');
 
 % obstacle array, N is number of obstacles
 N = 2;
@@ -20,21 +20,31 @@ for i = 1:N
     obstacles(i) = obs;
 end
 
-g = 9.81;
+%{ 
+cannot make this assumption
+
 m_marble = 1.27e-3;
 
 % mass of marble 1.27 grams
 % start with  impact velocity
 % assume impulse of 0.001 N*s
 v_imp = [0.001 / m_marble, 0];
+%}
 
+% v_imp initial is 0
+v_imp = 0;
+
+g = 9.81;
 dt = 0.05;
 
-for t = 0:dt:5
+for t = 0:dt:10
     marble = marble.updatepoints();
     
     % marble velocity due to gravity
-    v_g = -g * t;
+    v_g = -g * [0, t];
+    
+    % total velocity of the marble
+    v_total = v_imp + v_g;
     
     for obs = obstacles
         
@@ -48,12 +58,11 @@ for t = 0:dt:5
             centrept = collisionpts(i_centre, :);
             
             % new impact velocity based on total velocity before
-            v_imp = v_imp + impact(v_imp + [0, v_g], obs.normal(centrept));
+            v_imp = v_imp + impact(v_total, obs.normal(centrept));
         end
     end
     
-    marble = marble.move([0, dt * v_g]);
-    marble = marble.move(v_imp .* [dt, dt]);
+    marble = marble.move(v_total .* [dt, dt]);
     
     marblehandle = marble.draw();
     pause(dt);
