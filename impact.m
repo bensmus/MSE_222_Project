@@ -49,7 +49,7 @@ function vf = impact(v_init, obs_norm)
     %define the constitution of restitution
 %     e = 0.557;
     % testing with a new coefficient
-    e = 2;
+    e = 5;
 
     %finding the initial magnitudes
     v0 =  sqrt(v_init(1)^2 + v_init(2)^2)
