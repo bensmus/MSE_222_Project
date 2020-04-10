@@ -52,8 +52,8 @@ function vf = impact(v_init, obs_norm)
     e = 2;
 
     %finding the initial magnitudes
-    v0 = v_init; %sqrt(v_init(1)^2 + v_init(2)^2)
-    n0 = obs_norm; %sqrt(obs_norm(1)^2 + obs_norm(2)^2)
+    v0 =  sqrt(v_init(1)^2 + v_init(2)^2)
+    n0 =  sqrt(obs_norm(1)^2 + obs_norm(2)^2)
 
     %finding the dot products
     dotvn = dot(v_init, obs_norm);
