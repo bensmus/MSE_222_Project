@@ -3,9 +3,9 @@ screeny = 60;
 xlim([0, screenx]);
 ylim([0, screeny]);
 
-marble = UserPolygon2(UserArcFunction([30, 60], -2*pi:0.1:2*pi, 1), 'blue');
-%obs1 = UserPolygon2(UserArcFunction([40, 0], -2*pi:0.1:2*pi, 20), 'red');
-obs2 = UserPolygon2([[0, 20]; [30, 20]], 'red');
+marble = UserPolygon2(UserArcFunction([10, 50], -2*pi:0.1:2*pi, 1), 'blue');
+obs1 = UserPolygon2(UserArcFunction([40, 0], -2*pi:0.1:2*pi, 20), 'red');
+obs2 = UserPolygon2([[0, 50]; [30, 40]], 'red');
 
 % obstacle array, N is number of obstacles
 N = 1;
