@@ -16,7 +16,7 @@ p_vect = [p_vect; ramp(p_vect, 0.33, dt, 0)];
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 
 % bounce
-p_vect = [p_vect; bounce(p_vect, 0.05, dt)];
+p_vect = [p_vect; bounce(p_vect, 0.05, dt, 0.007)];
 
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.32, dt, 181)];
@@ -30,6 +30,8 @@ p_vect = [p_vect; ramp(p_vect, 0.32, dt, 181)];
 % outputting the amount of time used (pos stored in 0.01s) 
 % length-2 deals with the positions of stationary marble added initially
 time_in_seconds = (length(p_vect)-2)/100;
+%saving the velocity vector of the entire track
+v_vect = diff(p_vect);
 
 
 scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
@@ -116,18 +118,19 @@ end
 
 
 %causes very minimal differences; neglibigle
-function p_vect_update = bounce(p_vect, time_in_seconds, dt)
+function p_vect_update = bounce(p_vect, time_in_seconds, dt, radius)
     v_vect = diff(p_vect);
 
     % initial position and velocity before ramp
     p_o = p_vect(end, :);
     v_o = v_vect(end, :)
+    v_mag = norm(v_o)
     
     %coefficient of restitution for wood material
     e = 0.557;
     
     %final velocities after bounce
-    vf = [(3/7)*v_o(1) -e*v_o(2)]
+    vf = [(5/7)*(v_o(1)-(2/5)*v_mag) -e*v_o(2)]
     
     a_vect_update = [vf-v_o] + zeros(time_in_seconds * 1/dt, 2)
     
@@ -138,4 +141,14 @@ function p_vect_update = bounce(p_vect, time_in_seconds, dt)
     p_vect_update = p_o + cumsum(v_vect_update)* dt;
 end 
 
+
+function p_vect_update = pend(p_vect, time_in_seconds, dt, pend_mass, pend_height)
+
+    v_vect = diff(p_vect);
+
+    % initial position and velocity before ramp
+    p_o = p_vect(end, :);
+    v_o = v_vect(end, :)
     
+    %coefficient of restitution for wood material
+    e = 0.557;
