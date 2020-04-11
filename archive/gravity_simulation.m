@@ -36,10 +36,18 @@ v_imp = [0.001 / m_marble, 0];
 % v_imp initial is 0
 v_imp = 0;
 
+<<<<<<< HEAD
+%initialize storage arrays
+% vx = [0];
+% vy = [0]; 
+
+=======
 collision_time = 0;
+>>>>>>> master
 
 g = 9.81;
 dt = 0.05;
+
 
 for t = 0:dt:10
     marble = marble.updatepoints();
@@ -49,12 +57,25 @@ for t = 0:dt:10
     
     % total velocity of the marble
     v_total = v_imp + v_g;
+<<<<<<< HEAD
+%     v_total = [3 4];
+    %storing all the velocities
+%     vx(t) = v_total(1);
+%     vy(t) = v_total(2);
+    for obs = obstacles 
+        
+        % check if the array has intersection (if we have a collision)
+        if isempty(intersect(marble.points, obs.points, 'row')) == 0
+            
+       
+=======
     
     for obs = obstacles
 
         % check if the array has intersection (if we have a collision)
         if isempty(intersect(marble.points, obs.points, 'row')) == 0
 
+>>>>>>> master
             % finding a collision point
             collisionpts = intersect(marble.points, obs.points, 'row');
             temp = size(collisionpts);
@@ -67,6 +88,12 @@ for t = 0:dt:10
             v_total = impact(v_total, obs.normal(centrept));
             collision_time = t;
             
+<<<<<<< HEAD
+            % new impact velocity based on total velocity before
+            v_imp = v_imp + impact(v_total, obs.normal(centrept));
+            
+=======
+>>>>>>> master
         end
     end
  
