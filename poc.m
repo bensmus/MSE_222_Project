@@ -7,13 +7,30 @@ dt = 0.01;
 p_vect = [[0.01, 0.59]; [0.01, 0.59]];
 
 % we hit it 
-p_vect = [p_vect; hit(p_vect, 0.01, 2, dt)];
+p_vect = [p_vect; hit(p_vect, 0.01, 0.1, dt)];
+
+% flat path
+p_vect = [p_vect; ramp(p_vect, 0.33, dt, 0)];
 
 % then gravity turns on
-p_vect = [p_vect; drop(p_vect, 0.3, dt)];
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.05, dt)];
 
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 5, dt, -30)];
+p_vect = [p_vect; ramp(p_vect, 0.32, dt, 181)];
+% 
+% % then gravity turns on
+% p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% 
+% % drops onto a ramp
+% p_vect = [p_vect; ramp(p_vect, 0.32, dt, -3)];
+
+% outputting the amount of time used (pos stored in 0.01s) 
+% length-2 deals with the positions of stationary marble added initially
+time_in_seconds = (length(p_vect)-2)/100;
+
 
 scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
 
@@ -75,7 +92,7 @@ function p_vect_update = ramp(p_vect, time_in_seconds, dt, theta)
     v_mag = norm(v_o);
     
     
-%     % going down the ramp = (positive) direction
+    % going down the ramp = (positive) direction
     a_vect_update = [9.81*cosd(theta), 9.81*sind(theta)] + zeros(time_in_seconds * 1/dt, 2);
     % (10/7) would take into account the moment of inertia of marble ?
     
@@ -97,3 +114,28 @@ function p_vect_update = ramp(p_vect, time_in_seconds, dt, theta)
     p_vect_update = p_o + cumsum(v_vect_update) * dt;
 end 
 
+
+%causes very minimal differences; neglibigle
+function p_vect_update = bounce(p_vect, time_in_seconds, dt)
+    v_vect = diff(p_vect);
+
+    % initial position and velocity before ramp
+    p_o = p_vect(end, :);
+    v_o = v_vect(end, :)
+    
+    %coefficient of restitution for wood material
+    e = 0.557;
+    
+    %final velocities after bounce
+    vf = [(3/7)*v_o(1) -e*v_o(2)]
+    
+    a_vect_update = [vf-v_o] + zeros(time_in_seconds * 1/dt, 2)
+    
+    % int for velocity
+    v_vect_update = v_o + cumsum(a_vect_update) * dt;
+    
+    %int for position
+    p_vect_update = p_o + cumsum(v_vect_update)* dt;
+end 
+
+    
