@@ -1,4 +1,4 @@
-function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
+function p_vect_update = curve1(p_vect, time_in_seconds, r, dt)
     % ignoring gravity for now 
     
     % derivative of position

@@ -1,5 +1,6 @@
 % each position is spaced out by 0.01 seconds
 % everything is in base SI units
+clc; clear; close all;
 
 dt = 0.01;
 
@@ -126,8 +127,8 @@ d_s = p_vect(end, :);
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 d_s2 = p_vect(end, :);
 d = d_s2 - d_s
-% bounce
-p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+% % bounce
+% p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 %}
 % % pendulum in middle of ramp
 % p_vect = [p_vect; pend(p_vect, 0.1, dt, m, pend_m, 0)];
@@ -135,20 +136,9 @@ p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 % % continues on ramp
 % p_vect = [p_vect; ramp(p_vect, 0.1, dt, 0, u, m)];
 
-
-
-
-
-
-
-
-
-
-
-
-
+% function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
 % simplified curved path without gravity
-p_vect = [p_vect; curve(p_vect, 5, 0.01, dt)];
+p_vect = [p_vect; curve(p_vect, 6, 0.05, dt)];
 
 % outputting the amount of time used (pos stored in 0.01s) 
 % length-2 deals with the positions of stationary marble added initially
@@ -299,7 +289,7 @@ function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
 
     % initial position and velocity before ramp
     p_o = p_vect(end, :);
-    v_o = v_vect(end, :);
+    v_o = v_vect(end, :)
     v_mag = norm(v_o);
     
     % depending on the initial speed of the marble,
@@ -309,15 +299,15 @@ function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
     % get an array of unit vectors for the direction of the inwards 
     % acceleration.      
     w_mag = v_mag/r;
-    dtheta = w_mag * dt
+    dtheta = w_mag * dt;
     
     % pre-allocate acceleration array
     a_vect_update = zeros(time_in_seconds/dt, 2);
     
-    u = [-1, 0];
+    u = [1, 0];
     for i = 1:length(a_vect_update)
         a_vect_update(i, :) = u;
-        u = rotation(u.', dtheta).'
+        u = rotation(u.', dtheta).';
     end
     
     a_vect_update = a_vect_update * a_mag;

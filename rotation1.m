@@ -1,4 +1,4 @@
-function rotated_vector = rotation(vector, angle)
+function rotated_vector = rotation1(vector, angle)
     % deals with column vector
     
     M = [[cos(angle), -sin(angle)];[sin(angle), cos(angle)]];
