@@ -84,22 +84,25 @@ p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 1.06, dt, -1, u)];
+p_vect = [p_vect; ramp(p_vect, 0.7, dt, -1, u)];
+% pendulum in middle of ramp
+pends = [pends; p_vect(end,:)];
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, -1)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.77, dt, -1, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
-r_start = [r_start;p_vect(end,:)]
-angles = [angles; 185]
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 0.3, dt, 185, u)];
+p_vect = [p_vect; ramp(p_vect, 0.4, dt, 185, u)];
 % pendulum in middle of ramp
 pends = [pends; p_vect(end,:)];
 p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 185, u)];
 % pendulum in middle of ramp
 pends = [pends; p_vect(end,:)];
 p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
@@ -112,30 +115,23 @@ p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 p_vect = [p_vect; ramp(p_vect, 0.53, dt, 185, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
-d_s2 = p_vect(end, :);
-d = d_s2 - d_s;
-% function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
-% simplified curved path without gravity
-p_vect = [p_vect; curve(p_vect, 6, 0.05, dt)];
-
 % to help see function arguments
 % curve(p_vect, time_in_seconds, r, dt)
 p_vect = [p_vect; curve(p_vect, 0.1, 0.1, dt)];
+p_vect = [p_vect; ramp(p_vect, 1., dt, -6.4, u)];
 
 % outputting the amount of time used (pos stored in 0.01s) 
 % length-2 deals with the positions of stationary marble added initially
 time_in_seconds = (length(p_vect)-2)/100;
-disp(['marble arrived in: ', num2str(time_in_seconds)]);
+disp(['marble arrived in: ', num2str(time_in_seconds), ' seconds']);
 
-% saving the velocity vector of the entire track (in m/s)
-% multiply by 10 in order to go from m/(0.1s) to m/s
-v_vect = 10*diff(p_vect);
-%saving the velocity vector of the entire track
-v_vect = diff(p_vect);
-a_vect = diff(v_vect);
+% multiply by 100 in order to go from m/(0.01s) to m/s
+v_vect = 100*diff(p_vect);
+a_vect = 100*diff(v_vect);
 
-% % only for the Position plot
-% position_plot = scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
+
+% % only use for the Position plot
+position_plot = scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
 % title('Displacement');
 % xlabel('Displacement in X-direction');
 % ylabel('Displacement in Y-direction');
@@ -143,16 +139,20 @@ a_vect = diff(v_vect);
 % ylim([0, 60]);
 
 % % only for velocity plots; change names according to the plot type 
-% vx_plot = plot(100*v_vect(:,1));
-% vy_plot = plot(100*v_vect(:,2));
-v_test = []
+% v_mag = [sqrt(v_vect(:,0)^2 + sqrt(v_vect(0,:)^2]
+% plot(v_mag)
 % title('Linear Velocity');
 % xlabel('Velocity (m/s)');
 % ylabel('Displacement in Y-direction');
 % xlim([0, 60]);
 % ylim([0, 60]);
 
-
+% % only use for acceleration plot
+% a_mag = [sqrt(a_vect(:,0)^2 + sqrt(a_vect(0,:)^2]
+% plot(a_mag)
+% title('Linear Acceleration');
+% xlabel('Time (ms)');
+% ylabel('Acceleration (m/s^2)');
 
 
 % these functions always return update mx2 position vector
