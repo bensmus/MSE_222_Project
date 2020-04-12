@@ -17,15 +17,11 @@ p_vect = [[0.01, 0.59]; [0.01, 0.59]];
 p_vect = [p_vect; hit(p_vect, m, 0.1, dt)];
 % flat path
 p_vect = [p_vect; ramp(p_vect, 1.07, dt, 0, u)];
-flat_endpoint = p_vect(end,:)
+flat_endpoint = p_vect(end,:);
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
-
-
-r_start = [p_vect(end,:)];
-angles = [182];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
 % pendulum in middle of ramp
@@ -52,10 +48,6 @@ p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
-
-
-r_start = [r_start;p_vect(end,:)];
-angles = [angles; -1];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.7, dt, -1, u)];
 % pendulum in middle of ramp
@@ -67,9 +59,6 @@ p_vect = [p_vect; ramp(p_vect, 0.79, dt, -1, u)];
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
-
-r_start = [r_start;p_vect(end,:)];
-angles = [angles; 182];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
 % pendulum in middle of ramp
@@ -93,18 +82,13 @@ p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
-r_start = [r_start;p_vect(end,:)];
-angles = [angles; -1];
+
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 1.06, dt, -1, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
-
-
-r_start = [r_start;p_vect(end,:)]
-angles = [angles; 185]
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 185, u)];
 % pendulum in middle of ramp
@@ -118,32 +102,27 @@ p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
 % pendulum in middle of ramp
-pends = [pends; p_vect(end,:)]
+
 p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.53, dt, 185, u)];
 % then gravity turns on
-d_s = p_vect(end, :);
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
-d_s2 = p_vect(end, :);
-d = d_s2 - d_s
-% % bounce
-% p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
-%}
-% % pendulum in middle of ramp
-% p_vect = [p_vect; pend(p_vect, 0.1, dt, m, pend_m, 0)];
-% 
-% % continues on ramp
-% p_vect = [p_vect; ramp(p_vect, 0.1, dt, 0, u, m)];
 
-% function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
-% simplified curved path without gravity
-p_vect = [p_vect; curve(p_vect, 6, 0.05, dt)];
+%%%%%%%%%%%debug%%%%%%
+disp(p_vect)
+
+% to help see function arguments
+% curve(p_vect, time_in_seconds, r, dt)
+p_vect = [p_vect; curve(p_vect, 0.1, 0.1, dt)];
 
 % outputting the amount of time used (pos stored in 0.01s) 
 % length-2 deals with the positions of stationary marble added initially
 time_in_seconds = (length(p_vect)-2)/100;
-%saving the velocity vector of the entire track
+disp(['marble arrived in: ', num2str(time_in_seconds)]);
+
+% saving the velocity vector of the entire track (in m/s)
+% multiply by 10 in order to go from m/(0.1s) to m/s
 v_vect = 10*diff(p_vect);
 
 
@@ -284,8 +263,10 @@ end
 function p_vect_update = curve(p_vect, time_in_seconds, r, dt)
     % ignoring gravity for now 
     
+    % since the velocity has a physical meaning, 
+    % we have to multiply by 1/dt and keep track of units.
     % derivative of position
-    v_vect = diff(p_vect);
+    v_vect = diff(p_vect) * 1/dt;
 
     % initial position and velocity before ramp
     p_o = p_vect(end, :);
