@@ -142,8 +142,8 @@ position_plot = scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
 % v_mag = [sqrt(v_vect(:,0)^2 + sqrt(v_vect(0,:)^2]
 % plot(v_mag)
 % title('Linear Velocity');
-% xlabel('Velocity (m/s)');
-% ylabel('Displacement in Y-direction');
+% xlabel('Time (ms)');
+% ylabel('Velocity (m/s)');
 % xlim([0, 60]);
 % ylim([0, 60]);
 
