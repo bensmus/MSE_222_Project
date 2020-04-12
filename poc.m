@@ -27,12 +27,8 @@ p_vect = [p_vect; ramp(p_vect, 0.32, dt, 181)];
 % % drops onto a ramp
 % p_vect = [p_vect; ramp(p_vect, 0.32, dt, -3)];
 
-% displaying the amount of time used (pos stored in 0.01s) 
-% length-2 deals with the positions of stationary marble added initially
 time_in_seconds = (length(p_vect)-2)/100;
 disp(time_in_seconds);
-
-
 scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
 
 xlim([0, 60])
