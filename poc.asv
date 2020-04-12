@@ -8,7 +8,7 @@ u = 0.9;
 
 %marble mass
 m = 0.05;
-pend_m = 
+pend_m = 0.5;
 
 % stationary marble in time
 p_vect = [[0.01, 0.59]; [0.01, 0.59]];
@@ -16,48 +16,74 @@ p_vect = [[0.01, 0.59]; [0.01, 0.59]];
 p_vect = [p_vect; hit(p_vect, m, 0.1, dt)];
 % flat path
 p_vect = [p_vect; ramp(p_vect, 1.07, dt, 0, u)];
+flat_endpoint = p_vect(end,:)
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
+r_start = [p_vect(end,:)];
+angles = [182];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.6, dt, m, 0.5, 182)];
+pend1 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
 % continues on ramp
 p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.6, dt, m, 0.5, 182)];
+pend2 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
 % continues on ramp
-p_vect = [p_vect; ramp(p_vect, 0.88, dt, 182, u)];
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% pendulum in middle of ramp
+pend3 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
+% continues on ramp
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% pendulum in middle of ramp
+pend4 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
+% continues on ramp
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
+r_start = [r_start;p_vect(end,:)];
+angles = [angles 
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 1.06, dt, 0, u)];
+p_vect = [p_vect; ramp(p_vect, 0.7, dt, -1, u)];
+% pendulum in middle of ramp
+pend5 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, -1)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.79, dt, -1, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
-
+r_start = [r_start;p_vect(end,:)];
+angle = 182
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 182)];
+pend6 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.6, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 182)];
+pend7 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.6, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 182)];
+pend8 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.54, dt, 182, u)];
 % then gravity turns on
@@ -66,26 +92,33 @@ p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
+r_start = [r_start;p_vect(end,:)];
+angle4 = -1
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 1.06, dt, 0, u)];
+p_vect = [p_vect; ramp(p_vect, 1.06, dt, -1, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 
+r_start = [r_start;p_vect(end,:)]
+angle5 = 185
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.3, dt, 185, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 185)];
+lend9 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 185)];
+pend10 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.7, dt, m, 0.5, 185)];
+pend11 = p_vect(end,:)
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
 % drops onto a ramp
 p_vect = [p_vect; ramp(p_vect, 0.53, dt, 185, u)];
 % then gravity turns on
@@ -94,7 +127,7 @@ p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
 % % pendulum in middle of ramp
-% p_vect = [p_vect; pend(p_vect, 0.1, dt, m, 0.5, 0)];
+% p_vect = [p_vect; pend(p_vect, 0.1, dt, m, pend_m, 0)];
 % 
 % % continues on ramp
 % p_vect = [p_vect; ramp(p_vect, 0.1, dt, 0, u, m)];
