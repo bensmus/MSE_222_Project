@@ -126,33 +126,53 @@ time_in_seconds = (length(p_vect)-2)/100;
 disp(['marble arrived in: ', num2str(time_in_seconds), ' seconds']);
 
 % multiply by 100 in order to go from m/(0.01s) to m/s
-v_vect = 100*diff(p_vect);
-a_vect = 100*diff(v_vect);
+v_vect = 100*diff(p_vect)
+a_vect = 100*diff(v_vect)
 
 
 % % only use for the Position plot
 position_plot = scatter(100 * p_vect(:, 1), 100 * p_vect(:, 2));
-% title('Displacement');
-% xlabel('Displacement in X-direction');
-% ylabel('Displacement in Y-direction');
-% xlim([0, 60]);
-% ylim([0, 60]);
+title('Displacement');
+xlabel('Displacement in X-direction');
+ylabel('Displacement in Y-direction');
+xlim([0, 60]);
+ylim([0, 60]);
 
-% % only for velocity plots; change names according to the plot type 
-% v_mag = [sqrt(v_vect(:,0)^2 + sqrt(v_vect(0,:)^2]
-% plot(v_mag)
-% title('Linear Velocity');
+% % uncomment block below for v_x plot!
+% v_x = v_vect(:, 1);
+% plot(v_x)
+% title('x-component of linear velocity');
 % xlabel('Time (ms)');
 % ylabel('Velocity (m/s)');
 % xlim([0, 60]);
 % ylim([0, 60]);
 
-% % only use for acceleration plot
-% a_mag = [sqrt(a_vect(:,0)^2 + sqrt(a_vect(0,:)^2]
-% plot(a_mag)
-% title('Linear Acceleration');
+% % uncomment block below for v_y plot!
+% v_y = v_vect(:, 2);
+% plot(v_y)
+% title('y-component of linear velocity');
+% xlabel('Time (ms)');
+% ylabel('Velocity (m/s)');
+% xlim([0, 60]);
+% ylim([0, 60]);
+
+% % uncomment block below for a_x plot!
+% a_x = a_vect(:, 1);
+% plot(a_x)
+% title('x-component of linear acceleration');
 % xlabel('Time (ms)');
 % ylabel('Acceleration (m/s^2)');
+% xlim([0, 60]);
+% ylim([0, 60]);
+
+% % uncomment block below for a_y plot!
+% a_y = a_vect(:, 2);
+% plot(a_y)
+% title('y-component of linear acceleration');
+% xlabel('Time (ms)');
+% ylabel('Acceleration (m/s^2)');
+% xlim([0, 60]);
+% ylim([0, 60]);
 
 
 % these functions always return update mx2 position vector
