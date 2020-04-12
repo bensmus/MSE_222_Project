@@ -3,44 +3,113 @@
 
 dt = 0.01;
 
+%static friction coefficient for wood material 
+u = 0.9; 
+
+%marble mass
+m = 0.05;
+pend_m = 0.5;
+
 % stationary marble in time
 p_vect = [[0.01, 0.59]; [0.01, 0.59]];
-
 % we hit it 
-p_vect = [p_vect; hit(p_vect, 0.05, 0.1, dt)];
-
+p_vect = [p_vect; hit(p_vect, m, 0.1, dt)];
 % flat path
-p_vect = [p_vect; ramp(p_vect, 0.33, dt, 0)];
-
+p_vect = [p_vect; ramp(p_vect, 1.07, dt, 0, u)];
 % then gravity turns on
 p_vect = [p_vect; drop(p_vect, 0.1, dt)];
-
-% bounce
-p_vect = [p_vect; bounce(p_vect, 0.05, dt)];
-
-% drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 0.3, dt, 181)];
-
-% pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.1, dt, 0.05, 0.2, 181)];
-
-% continues on ramp
-p_vect = [p_vect; ramp(p_vect, 0.13, dt, 181)];
-
-% then gravity turns on
-p_vect = [p_vect; drop(p_vect, 0.1, dt)];
-
 % bounce
 p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
 
+
 % drops onto a ramp
-p_vect = [p_vect; ramp(p_vect, 0.3, dt, -1)];
-
+p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
 % pendulum in middle of ramp
-p_vect = [p_vect; pend(p_vect, 0.1, dt, 0.05, 0.2, -1)];
-
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
 % continues on ramp
-p_vect = [p_vect; ramp(p_vect, 0.1, dt, -1)];
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
+% continues on ramp
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
+% continues on ramp
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, 182)];
+% continues on ramp
+p_vect = [p_vect; ramp(p_vect, 0.5, dt, 182, u)];
+% then gravity turns on
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+
+
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.7, dt, -1, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.6, dt, m, pend_m, -1)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.79, dt, -1, u)];
+% then gravity turns on
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+
+
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.3, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.6, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.6, dt, 182, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 182)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.54, dt, 182, u)];
+% then gravity turns on
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+
+
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 1.06, dt, -1, u)];
+% then gravity turns on
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+
+
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.3, dt, 185, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.6, dt, 185, u)];
+% pendulum in middle of ramp
+p_vect = [p_vect; pend(p_vect, 0.7, dt, m, pend_m, 185)];
+% drops onto a ramp
+p_vect = [p_vect; ramp(p_vect, 0.53, dt, 185, u)];
+% then gravity turns on
+p_vect = [p_vect; drop(p_vect, 0.1, dt)];
+% bounce
+p_vect = [p_vect; bounce(p_vect, 0.1, dt)];
+
+% % pendulum in middle of ramp
+% p_vect = [p_vect; pend(p_vect, 0.1, dt, m, pend_m, 0)];
+% 
+% % continues on ramp
+% p_vect = [p_vect; ramp(p_vect, 0.1, dt, 0, u, m)];
 
 % outputting the amount of time used (pos stored in 0.01s) 
 % length-2 deals with the positions of stationary marble added initially
@@ -98,7 +167,7 @@ function p_vect_update = drop(p_vect, time_in_seconds, dt)
 end
 
 
-function p_vect_update = ramp(p_vect, time_in_seconds, dt, theta)
+function p_vect_update = ramp(p_vect, time_in_seconds, dt, theta, static_fr)
     % g = 9.81 m/(s^2)
     
     v_vect = diff(p_vect);
@@ -110,12 +179,10 @@ function p_vect_update = ramp(p_vect, time_in_seconds, dt, theta)
     
     
     % going down the ramp = (positive) direction
-    a_vect_update = [9.81*cosd(theta), 9.81*sind(theta)] + zeros(time_in_seconds * 1/dt, 2);
+    a_vect_update = [(1-static_fr)*cosd(theta)*9.81 (1-static_fr)*sind(theta)*9.81] + zeros(time_in_seconds * 1/dt, 2);
     % (10/7) would take into account the moment of inertia of marble ?
     
     % ignore this section for now 
-%     % int for velocity
-%     v_vect_update = v_o + cumsum(a_vect_update) * dt;
     
 %     v_2 = sqrt(v_mag^2 + (10/7)*9.81*sind(theta))
 %     v_2 = v_o + (10/7)*-9.81*sind(theta)
