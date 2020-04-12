@@ -111,7 +111,6 @@ p_vect = [p_vect; drop(p_vect, 0.1, dt)];
 
 %%%%%%%%%%%debug%%%%%%
 
-
 % to help see function arguments
 % curve(p_vect, time_in_seconds, r, dt)
 p_vect = [p_vect; curve(p_vect, 0.1, 0.1, dt)];
